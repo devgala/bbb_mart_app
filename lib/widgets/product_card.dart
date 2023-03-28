@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/cart.dart';
 import '../providers/product.dart';
 import '../screens/product_detail_screen.dart';
 
@@ -8,6 +9,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context,listen: true);
+    final cart = Provider.of<Cart>(context);
     /*
     * We can use Consumer<Prodcut>(
     * builder : (context,provider_object(here its product from above),child) => Some Widget
@@ -34,7 +36,9 @@ class ProductCard extends StatelessWidget {
           }),
           trailing: IconButton(
               icon: const Icon(Icons.shopping_cart),
-              onPressed: () {},
+              onPressed: () {
+                cart.addItems(product.id, product.title, product.price);
+              },
               color: Theme.of(context).accentColor),
         ),
         child: GestureDetector(
@@ -42,7 +46,7 @@ class ProductCard extends StatelessWidget {
               Navigator.pushNamed(context, ProductDetailScreen.routeName,
                   arguments: product.id);
             },
-            child: Image.network(product.imageUrl, fit: BoxFit.cover)),
+            child: Container(child: Image.network(product.imageUrl, fit: BoxFit.cover))),
       ),
     );
   }
