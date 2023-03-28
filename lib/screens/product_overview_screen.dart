@@ -1,3 +1,4 @@
+import 'package:bbb_mart/screens/cart_screen.dart';
 import 'package:bbb_mart/widgets/badge.dart';
 import 'package:bbb_mart/widgets/product_grid.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,10 +28,12 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           Consumer<Cart>(
             builder: (_, cart,_2) {
               return Badge(
-                  child: IconButton(
-                      icon: Icon(Icons.shopping_cart), onPressed: () {}),
                   value: cart.getItemCount.toString(),
-                  color: Theme.of(context).accentColor);
+                  color: Theme.of(context).accentColor,
+                  child: IconButton(
+                      icon: const Icon(Icons.shopping_cart), onPressed: () {
+                        Navigator.of(context).pushNamed(CartScreen.routeName);
+                  }));
             },
           ),
           PopupMenuButton(

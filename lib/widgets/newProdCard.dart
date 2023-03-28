@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../providers/cart.dart';
 
 import '../providers/product.dart';
+import '../screens/product_detail_screen.dart';
 
 class newProdCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
+    final cart = Provider.of<Cart>(context);
     // TODO: implement build
     // Generated code for this Column Widget...
 
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black26,
-          width: 0.8
-
-        ),
-            borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.black26, width: 0.8),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Column(
         children: [
@@ -26,11 +25,17 @@ class newProdCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Stack(children: <Widget>[
-                Image.network(
-                  product.imageUrl,
-                  width: (MediaQuery.of(context).size.width) * 0.4,
-                  height: (MediaQuery.of(context).size.height) * 0.15,
-                  fit: BoxFit.contain,
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, ProductDetailScreen.routeName,
+                        arguments: product.id);
+                  },
+                  child: Image.network(
+                    product.imageUrl,
+                    width: (MediaQuery.of(context).size.width) * 0.4,
+                    height: (MediaQuery.of(context).size.height) * 0.15,
+                    fit: BoxFit.contain,
+                  ),
                 ),
                 Positioned(
                   right: -6,
@@ -46,10 +51,19 @@ class newProdCard extends StatelessWidget {
                         minWidth: 16,
                         minHeight: 16,
                       ),
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.favorite),
-                          color: Color.fromRGBO(209, 0, 0, 0.7))),
+                      child: (product.isFavourite)
+                          ? IconButton(
+                              onPressed: () {
+                                product.toggleFavourite();
+                              },
+                              icon: Icon(Icons.favorite),
+                              color: Color.fromRGBO(209, 0, 0, 0.7))
+                          : IconButton(
+                              onPressed: () {
+                                product.toggleFavourite();
+                              },
+                              icon: Icon(Icons.favorite_border_outlined),
+                              color: Color.fromRGBO(209, 0, 0, 0.7))),
                 )
               ]),
               SizedBox(
@@ -69,14 +83,16 @@ class newProdCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "\$ ${product.price.toString()}",
+                    "\$${product.price.toString()}",
                     style: const TextStyle(
                         fontSize: 15, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  cart.addItems(product.id, product.title, product.price);
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0))),

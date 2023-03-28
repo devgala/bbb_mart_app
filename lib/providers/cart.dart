@@ -23,5 +23,16 @@ void addItems(String productID,String title,double price)
 int get getItemCount{
     return _productCartMap.length;
 }
+double get getTotalAmount{
+    double total = 0.0;
+    _productCartMap.forEach((key, value) {
+      total+= value.price*value.quantity;
+    });
+    return total;
+}
+void removeItem(String productID){
+      _productCartMap.remove(productID);
+      notifyListeners();
+}
 
 }
