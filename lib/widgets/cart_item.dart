@@ -9,7 +9,8 @@ class CartItem extends StatelessWidget{
   final String prodId;
   final int quantity;
   final double price;
-  CartItem({required this.quantity,required this.price,required this.id,required this.title,required this.prodId});
+  final Function removeOne;
+  CartItem({required this.quantity,required this.price,required this.id,required this.title,required this.prodId,required this.removeOne});
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
@@ -42,8 +43,23 @@ class CartItem extends StatelessWidget{
         child: Padding(padding: EdgeInsets.all(8.0),
           child: ListTile(
               title:Text(title,style: TextStyle(fontSize: 20)),
-              leading: Chip(label: Text("\$${price}",style: TextStyle(fontSize: 15)),backgroundColor: Color.fromRGBO(0, 0, 204, 0.2)),
-              trailing:  CircleAvatar(child: FittedBox(child: Text("x${quantity}",style: TextStyle(fontSize: 15)))),
+              leading: Chip(label: Text("\$${price}",style: TextStyle(fontSize: 13)),backgroundColor: Color.fromRGBO(0, 0, 204, 0.2)),
+              trailing:  FittedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(onPressed: (){
+                      removeOne(prodId);
+                    }, icon: Icon(Icons.remove)),
+                    CircleAvatar(child: FittedBox(child: Text("x${quantity}",style: TextStyle(fontSize: 15)))),
+
+
+                  ],
+                ),
+              ),
+            //subtitle: 
           ),
 
         ),

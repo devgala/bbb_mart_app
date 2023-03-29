@@ -32,9 +32,10 @@ class CartScreen extends StatelessWidget {
                       width: 10,
                     ),
                     Chip(
-                        label: Text("\$${cart.getTotalAmount}"),
+                        label: Text("\$${cart.getTotalAmount.toStringAsFixed(2)}"),
                         backgroundColor: Color.fromRGBO(255, 242, 47, 0.3)),
                     Spacer(),
+
                     ElevatedButton(
                         onPressed: () {}, child: const Text("Place Order")),
                   ],
@@ -42,7 +43,8 @@ class CartScreen extends StatelessWidget {
               )),
           Expanded(
               child: ListView.builder(
-            itemBuilder: (ctx, i) => ci.CartItem(
+            itemBuilder: (ctx, i) =>  ci.CartItem(
+              removeOne: cart.removeOne,
               prodId: cart.getcart.keys.toList()[i],
                 title: cart.getcart.values.toList()[i].title,
                 id: cart.getcart.values.toList()[i].id,

@@ -77,8 +77,9 @@ class newProdCard extends StatelessWidget {
                     child: Container(
                       child: Text(
                         product.title,
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 14),
                         overflow: TextOverflow.ellipsis,
+                        softWrap: true,
                       ),
                     ),
                   ),
