@@ -73,4 +73,9 @@ class Cart with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void clear(){
+    _productCartMap={};
+    notifyListeners();
+  }
 }

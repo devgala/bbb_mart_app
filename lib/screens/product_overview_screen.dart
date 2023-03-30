@@ -1,4 +1,5 @@
 import 'package:bbb_mart/screens/cart_screen.dart';
+import 'package:bbb_mart/widgets/app_drawer.dart';
 import 'package:bbb_mart/widgets/badge.dart';
 import 'package:bbb_mart/widgets/product_grid.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +12,7 @@ import '../widgets/product_card.dart';
 enum FilterItems { Favourites, All }
 
 class ProductOverviewScreen extends StatefulWidget {
+  static const routeName = '/overviewScreen';
   @override
   State<ProductOverviewScreen> createState() => _ProductOverviewScreenState();
 }
@@ -22,7 +24,9 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
     //final cart = Provider.of<Cart>(context);
     //this file is a screen
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(
+
         title: const Text("BBB Mart"),
         actions: <Widget>[
           Consumer<Cart>(
