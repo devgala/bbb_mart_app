@@ -26,7 +26,7 @@ class newProdCard extends StatelessWidget {
             children: [
               Stack(children: <Widget>[
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, ProductDetailScreen.routeName,
                         arguments: product.id);
                   },
@@ -93,6 +93,14 @@ class newProdCard extends StatelessWidget {
               OutlinedButton(
                 onPressed: () {
                   cart.addItems(product.id, product.title, product.price);
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: const Text('1 item added to cart'),
+                    action: SnackBarAction(label: 'UNDO',onPressed: (){
+                              cart.removeOne(product.id);
+                    }),
+                    duration:const  Duration(seconds: 1),
+                  ));
                 },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(

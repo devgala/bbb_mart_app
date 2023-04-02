@@ -2,6 +2,7 @@ import 'package:bbb_mart/providers/Orders.dart';
 import 'package:bbb_mart/providers/cart.dart';
 import 'package:bbb_mart/providers/products_provider.dart';
 import 'package:bbb_mart/screens/cart_screen.dart';
+import 'package:bbb_mart/screens/manager_screen.dart';
 import 'package:bbb_mart/screens/orders_screen.dart';
 import 'package:bbb_mart/screens/product_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
           CartScreen.routeName: (ctx) => CartScreen(),
           OrdersScreen.routeName: (ctx)=>OrdersScreen(),
+          ManagerScreen.routeName: (ctx)=>ManagerScreen(),
         },
       ),
     );

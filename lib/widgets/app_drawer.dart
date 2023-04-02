@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/Orders.dart';
 import '../providers/cart.dart';
+import '../screens/manager_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -43,7 +44,7 @@ class AppDrawer extends StatelessWidget {
                     maxRadius: 14)
                 : null,
             onTap: () {
-              Navigator.of(context).pushNamed(CartScreen.routeName);
+              Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
             },
           ),
           ListTile(
@@ -57,7 +58,14 @@ class AppDrawer extends StatelessWidget {
                 maxRadius: 14)
                 : null,
             onTap: () {
-              Navigator.of(context).pushNamed(OrdersScreen.routeName);
+              Navigator.of(context).pushReplacementNamed(OrdersScreen.routeName);
+            },
+          ),ListTile(
+            leading: Icon(Icons.edit_note),
+            title: Text('Edit Products'),
+
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(ManagerScreen.routeName);
             },
           ),
         ],
