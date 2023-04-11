@@ -1,4 +1,5 @@
 import 'package:bbb_mart/providers/products_provider.dart';
+import 'package:bbb_mart/screens/edit_product_screen.dart';
 import 'package:bbb_mart/widgets/app_drawer.dart';
 import 'package:bbb_mart/widgets/manager_prod_card.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,9 @@ class ManagerScreen extends StatelessWidget {
     return Scaffold(
       drawer: AppDrawer(),
       appBar: AppBar(title: const Text('Listed Products'), actions: <Widget>[
-        IconButton(onPressed: () {}, icon: const Icon(Icons.add))
+        IconButton(onPressed: () {
+          Navigator.of(context).pushNamed(EditProductScreen.routeName);
+        }, icon: const Icon(Icons.add))
       ]),
       body: ListView.builder(
           itemCount: productProvider.productList.length,
